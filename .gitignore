@@ -1,0 +1,40 @@
+/target
+/lib
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+.lein-*
+.nrepl-port
+.hgignore
+.hg/
+
+.DS_Store
+scratch*
+TODO
+
+#lint
+.eastwood
+clint.out
+
+# IntelliJ files
+.idea/
+*.iml
+
+# VS Code
+.vscode
+.clj-kondo/
+.lsp/
+
+
+profiles.clj
+/.env
+
+# luminus
+dev-config.edn
+test-config.edn
+/node_modules
+/log
+
