@@ -2,7 +2,7 @@
   (:require
    [rabbithole.core :as rh]))
 
-(defn- load-file
+(defn- load-vector-of-ints
   [file-name]
   (->>
    file-name
@@ -28,31 +28,19 @@
   [file-name]
   (->>
    file-name
-   rh/read-lines
-   (map rh/to-int)
-   (into [])
+   load-vector-of-ints
    count-larger))
 
-;; class Day01
-;;   # "How many measurements are larger than the previous measurement?"
-;;   def part_1(file_name)
-;;     lines = File.readlines(file_name, chomp: true).map &:to_i
-;;     count_larger lines
-;;   end
-
-;;   # Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?
-;;   def part_2(file_name)
-;;     lines = File.readlines(file_name, chomp: true).map &:to_i
-;;     windows = lines.each_cons(3).to_a.map &:sum
-;;     count_larger windows
-;;   end
-
-;;   # -----------------------------------------------------------------
-;;   private
-
-;;   def count_larger(ary)
-;;     ary
-;;       .filter.with_index { |nxt, i| i > 0 && nxt > ary[i - 1] }
-;;       .size
-;;   end
-;; end        
+(defn part-2
+  "Consider sums of a three-measurement sliding window. How many sums are larger than the previous sum?"
+  [file-name]
+  (->>
+   file-name
+   load-vector-of-ints
+   ;; `partition` gives us a sliding window:
+   ;; aoc21.core=> (partition 3 1 v)
+   ;; ((10 12 9) (12 9 13) (9 13 8))
+   (partition 3 1)
+   (map #(apply + %1))
+   (into [])
+   count-larger))
