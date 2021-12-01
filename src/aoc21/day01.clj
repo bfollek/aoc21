@@ -2,26 +2,32 @@
   (:require
    [rabbithole.core :as rh]))
 
-;; (defn part-1
-;;   "How many measurements are larger than the previous measurement?"
-;;   [file-name]
-;;   (let [lines (into [] (rh/read-lines file-name))]
-;;     (loop [i 0 cnt 0]
-;;       (if (> i (dec (count lines)))
-;;         cnt
-;;         (recur)))))
 
 
-(defn count-larger
+(defn- count-larger
   "Count the elements that are larger than the preceding element."
   [v]
-  ;(keep-indexed (fn [idx val] (when (and (> idx 0) (> val (v (dec idx)))) idx)) v))
   (->>
    v
-   ;; When the index > 0 and the value > prev value.
+   ;; %1 is the index; %2 is the element.
+   ;; Keep when the index > 0 and the element > prev element.
+   ;; We end up with a seq of indexes that we can count.
+   ;; We could as easily use `true` instead of the index, but the 
+   ;; actual indexes might be useful for debugging.
    (keep-indexed #(when (and (> %1 0) (> %2 (v (dec %1)))) %1))
    count))
-  ;(keep-indexed #(when (and (> %1 0) (> %2 (v (dec %1)))) %1) v))
+
+(defn part-1
+  "How many measurements are larger than the previous measurement?"
+  [file-name]
+  ;(let [lines (into [] (rh/read-lines file-name))]
+   ; (count-larger lines)))
+  (->>
+   file-name
+   rh/read-lines
+   (map rh/to-int)
+   (into [])
+   count-larger))
 
 ;; class Day01
 ;;   # "How many measurements are larger than the previous measurement?"
