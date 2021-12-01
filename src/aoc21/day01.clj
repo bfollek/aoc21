@@ -2,7 +2,13 @@
   (:require
    [rabbithole.core :as rh]))
 
-
+(defn- load-file
+  [file-name]
+  (->>
+   file-name
+   rh/read-lines
+   (map rh/to-int)
+   (into [])))
 
 (defn- count-larger
   "Count the elements that are larger than the preceding element."
@@ -20,8 +26,6 @@
 (defn part-1
   "How many measurements are larger than the previous measurement?"
   [file-name]
-  ;(let [lines (into [] (rh/read-lines file-name))]
-   ; (count-larger lines)))
   (->>
    file-name
    rh/read-lines
