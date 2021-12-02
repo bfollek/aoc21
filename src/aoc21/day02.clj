@@ -5,9 +5,9 @@
 
 (defrecord Move [direction distance])
 
-(defrecord Position [horizontal depth])
+(defrecord Position [depth horizontal])
 
-(defrecord AimedPosition [aim horizontal depth])
+(defrecord AimedPosition [aim depth horizontal])
 
 (defn parse-move
   [s]
