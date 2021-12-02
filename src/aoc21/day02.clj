@@ -9,19 +9,19 @@
 
 (defrecord AimedPosition [aim depth horizontal])
 
-(defn parse-move
+(defn- parse-move
   [s]
   (let [[direction distance] (str/split s #" ")]
     (->Move direction (rh/to-int distance))))
 
-(defn load-moves
+(defn- load-moves
   [file-name]
   (->>
    file-name
    rh/read-lines
    (map parse-move)))
 
-(defn make-move
+(defn- make-move
   [{:keys [depth horizontal] :as pos} {:keys [direction distance]}]
   (case direction
     "forward" (assoc pos :horizontal (+ horizontal distance))
@@ -29,7 +29,7 @@
     "down" (assoc pos :depth (+ depth distance))
     (throw (Exception. (str "Unknown direction:" direction)))))
 
-(defn make-aimed-move
+(defn- make-aimed-move
   [{:keys [aim depth horizontal] :as pos} {:keys [direction distance]}]
   (case direction
     "forward" (assoc pos :horizontal (+ horizontal distance)
