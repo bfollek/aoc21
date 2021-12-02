@@ -10,4 +10,5 @@
 
 (deftest direction-exception
   (testing "direction exception."
-    (is (thrown-with-msg? Exception #"Unknown direction" (aoc21.day02/part-1 "data/day02-direction-exception.txt")))))
+    (is (thrown-with-msg? Exception #"Unknown direction" (aoc21.day02/part-1 "data/day02-direction-exception.txt"))))
+  (is (thrown-with-msg? Exception #"Unknown direction" (aoc21.day02/part-2 "data/day02-direction-exception.txt"))))
