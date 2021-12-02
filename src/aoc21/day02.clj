@@ -25,12 +25,6 @@
     "forward" (assoc pos :horizontal (+ (:horizontal pos) (:distance move)))
     "up" (assoc pos :depth (- (:depth pos) (:distance move)))
     "down" (assoc pos :depth (+ (:depth pos) (:distance move)))))
-  ;;TODO
-  ;;(def specific-watson (assoc watson :appears-in "Sign of the Four"))
-;;    (case mystr
-;;     "" 0
-;;     "hello" (count mystr)))
-
 
 ;; 1990000
 (defn part-1
