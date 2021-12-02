@@ -7,6 +7,8 @@
 
 (defrecord Position [horizontal depth])
 
+(defrecord AimedPosition [aim horizontal depth])
+
 (defn parse-move
   [s]
   (let [[direction distance] (str/split s #" ")]
@@ -28,9 +30,26 @@
       "down" (assoc pos :depth (+ (:depth pos) delta))
       (throw (Exception. (str "Unknown direction:" (:direction move)))))))
 
+(defn make-aimed-move
+  [pos move]
+  (let [delta (:distance move)]
+    (case (:direction move)
+      "forward" (assoc pos :horizontal (+ (:horizontal pos) delta)
+                       :depth (+ (:depth pos) (* (:aim pos) delta)))
+      "up" (assoc pos :aim (- (:aim pos) delta))
+      "down" (assoc pos :aim (+ (:aim pos) delta))
+      (throw (Exception. (str "Unknown direction:" (:direction move)))))))
+
 (defn part-1
   "Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
   [file-name]
   (let [moves (load-moves file-name)
         pos (reduce make-move (->Position 0 0) moves)]
+    (* (:horizontal pos) (:depth pos))))
+
+(defn part-2
+  "Using this new interpretation of the commands, calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
+  [file-name]
+  (let [moves (load-moves file-name)
+        pos (reduce make-aimed-move (->AimedPosition 0 0 0) moves)]
     (* (:horizontal pos) (:depth pos))))

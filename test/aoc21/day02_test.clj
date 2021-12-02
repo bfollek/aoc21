@@ -4,7 +4,9 @@
 
 (deftest day02
   (testing "part-1."
-    (is (= 1990000 (aoc21.day02/part-1 "data/day02.txt")))))
+    (is (= 1990000 (aoc21.day02/part-1 "data/day02.txt"))))
+  (testing "part-2."
+    (is (= 1975421260 (aoc21.day02/part-2 "data/day02.txt")))))
 
 (deftest direction-exception
   (testing "direction exception."

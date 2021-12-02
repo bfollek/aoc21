@@ -12,9 +12,15 @@ lein test
 
 ### Day 1 - Done. 
 
-I learned about:
+Highlights:
 * `keep_indexed`
 * Using `partition` for a sliding window
+
+### Day 2 - Done.
+
+Highlights:
+* Nice example of `reduce`.
+* `throw`ing an exception, and testing for it.
 
 #### Benchmarking
 
