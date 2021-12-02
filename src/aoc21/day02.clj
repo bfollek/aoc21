@@ -21,12 +21,12 @@
 
 (defn make-move
   [pos move]
-  (case (:direction move)
-    "forward" (assoc pos :horizontal (+ (:horizontal pos) (:distance move)))
-    "up" (assoc pos :depth (- (:depth pos) (:distance move)))
-    "down" (assoc pos :depth (+ (:depth pos) (:distance move)))))
+  (let [delta (:distance move)]
+    (case (:direction move)
+      "forward" (assoc pos :horizontal (+ (:horizontal pos) delta))
+      "up" (assoc pos :depth (- (:depth pos) delta))
+      "down" (assoc pos :depth (+ (:depth pos) delta)))))
 
-;; 1990000
 (defn part-1
   "Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
   [file-name]
