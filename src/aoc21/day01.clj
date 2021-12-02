@@ -2,7 +2,7 @@
   (:require
    [rabbithole.core :as rh]))
 
-(defn- load-seq-of-ints
+(defn- load-ints
   [file-name]
   (->>
    file-name
@@ -13,7 +13,7 @@
   "Count the elements that are larger than the preceding element."
   [sq]
   (let
-    ;; So that we can look at prev elements quickly.
+    ;; lazy-seq to vector so that we can look at prev elements quickly.
    [v (into [] sq)
     ;; %1 is the index; %2 is the element.
     ;; Keep when the index > 0 and the element > prev element.
@@ -28,7 +28,7 @@
   [file-name]
   (->>
    file-name
-   load-seq-of-ints
+   load-ints
    count-larger))
 
 (defn part-2
@@ -36,7 +36,7 @@
   [file-name]
   (->>
    file-name
-   load-seq-of-ints
+   load-ints
    ;; `partition` gives us a sliding window:
    ;; aoc21.core=> (partition 3 1 v)
    ;; ((10 12 9) (12 9 13) (9 13 8))
