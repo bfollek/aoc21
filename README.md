@@ -19,6 +19,7 @@ Highlights:
 ### Day 2 - Done.
 
 Highlights:
+* `:keys` to destructure a map/record param easily.
 * Nice example of `reduce`.
 * `throw`ing an exception, and testing for it.
 
