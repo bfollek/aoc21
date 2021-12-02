@@ -25,7 +25,8 @@
     (case (:direction move)
       "forward" (assoc pos :horizontal (+ (:horizontal pos) delta))
       "up" (assoc pos :depth (- (:depth pos) delta))
-      "down" (assoc pos :depth (+ (:depth pos) delta)))))
+      "down" (assoc pos :depth (+ (:depth pos) delta))
+      (throw (Exception. (str "Unknown direction:" (:direction move)))))))
 
 (defn part-1
   "Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
