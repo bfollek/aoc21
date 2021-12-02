@@ -15,5 +15,6 @@ lein test
 I learned about:
 * `keep_indexed`
 * Using `partition` for a sliding window
+* Preferring a vector to a seq for indexed lookups, because the seq may be O(n).
 
 ### Day 2 - 
