@@ -13,7 +13,7 @@
   "Count the elements that are larger than the preceding element."
   [sq]
   (let
-    ;; lazy-seq to vector so that we can look at prev elements quickly.
+    ;; lazy-seq to vector so that we can index to prev elements quickly.
    [v (into [] sq)
     ;; %1 is the index; %2 is the element.
     ;; Keep when the index > 0 and the element > prev element.
