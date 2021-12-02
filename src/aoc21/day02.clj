@@ -30,15 +30,25 @@
       "down" (assoc pos :depth (+ (:depth pos) delta))
       (throw (Exception. (str "Unknown direction:" (:direction move)))))))
 
+;; (defn make-aimed-move
+;;   [pos move]
+;;   (let [delta (:distance move)]
+;;     (case (:direction move)
+;;       "forward" (assoc pos :horizontal (+ (:horizontal pos) delta)
+;;                        :depth (+ (:depth pos) (* (:aim pos) delta)))
+;;       "up" (assoc pos :aim (- (:aim pos) delta))
+;;       "down" (assoc pos :aim (+ (:aim pos) delta))
+;;       (throw (Exception. (str "Unknown direction:" (:direction move)))))))
+
 (defn make-aimed-move
-  [pos move]
-  (let [delta (:distance move)]
-    (case (:direction move)
-      "forward" (assoc pos :horizontal (+ (:horizontal pos) delta)
-                       :depth (+ (:depth pos) (* (:aim pos) delta)))
-      "up" (assoc pos :aim (- (:aim pos) delta))
-      "down" (assoc pos :aim (+ (:aim pos) delta))
-      (throw (Exception. (str "Unknown direction:" (:direction move)))))))
+  [{:keys [aim depth horizontal] :as pos} {:keys [direction distance]}]
+  (case direction
+    "forward" (assoc pos :horizontal (+ horizontal distance)
+                     :depth (+ depth (* aim distance)))
+    "up" (assoc pos :aim (- aim distance))
+    "down" (assoc pos :aim (+ aim distance))
+    (throw (Exception. (str "Unknown direction:" direction)))))
+
 
 (defn part-1
   "Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
