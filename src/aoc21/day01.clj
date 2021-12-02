@@ -12,16 +12,16 @@
 (defn- count-larger
   "Count the elements that are larger than the preceding element."
   [sq]
-  (let [v (into [] sq)] ; So that we can look at prev elements quickly.
-    (->>
-     v
-     ;; %1 is the index; %2 is the element.
-     ;; Keep when the index > 0 and the element > prev element.
-     ;; We end up with a seq of indexes that we can count.
-     ;; We could as easily use `true` instead of the index, but the 
-     ;; actual indexes might be useful for debugging.
-     (keep-indexed #(when (and (> %1 0) (> %2 (nth v (dec %1)))) %1))
-     count)))
+  (let
+    ;; So that we can look at prev elements quickly.
+   [v (into [] sq)
+    ;; %1 is the index; %2 is the element.
+    ;; Keep when the index > 0 and the element > prev element.
+    ;; We end up with a seq of indexes that we can count.
+    ;; We could as easily use `true` instead of the index, but the 
+    ;; actual indexes might be useful for debugging.
+    larger (keep-indexed #(when (and (> %1 0) (> %2 (nth v (dec %1)))) %1) v)]
+    (count larger)))
 
 (defn part-1
   "How many measurements are larger than the previous measurement?"
