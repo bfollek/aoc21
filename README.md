@@ -36,3 +36,4 @@ I used `criterium/quick-bench` to benchmark.
 ### Day 3 - 
 
 #### Remember
+* `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
