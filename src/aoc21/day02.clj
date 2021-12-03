@@ -27,7 +27,7 @@
     "forward" (assoc pos :horizontal (+ horizontal distance))
     "up" (assoc pos :depth (- depth distance))
     "down" (assoc pos :depth (+ depth distance))
-    (throw (Exception. (str "Unknown direction:" direction)))))
+    (throw (IllegalArgumentException. (str "Unknown direction:" direction)))))
 
 (defn- make-aimed-move
   [{:keys [aim depth horizontal] :as pos} {:keys [direction distance]}]
@@ -36,7 +36,7 @@
                      :depth (+ depth (* aim distance)))
     "up" (assoc pos :aim (- aim distance))
     "down" (assoc pos :aim (+ aim distance))
-    (throw (Exception. (str "Unknown direction:" direction)))))
+    (throw (IllegalArgumentException. (str "Unknown direction:" direction)))))
 
 (defn part-1
   "Calculate the horizontal position and depth you would have after following the planned course. What do you get if you multiply your final horizontal position by your final depth?"
