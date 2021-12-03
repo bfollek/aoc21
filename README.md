@@ -12,16 +12,10 @@ lein test
 
 ### Day 1 - Done. 
 
-Highlights:
+#### Remember
+
 * `keep_indexed`
 * Using `partition` for a sliding window
-
-### Day 2 - Done.
-
-Highlights:
-* `:keys` to destructure a map/record param easily.
-* Nice example of `reduce`.
-* `throw`ing an exception, and testing for it.
 
 #### Benchmarking
 
@@ -31,4 +25,14 @@ Also, `nth` was slighly, but consistently, faster than putting the vector in fun
 
 I used `criterium/quick-bench` to benchmark.
 
-### Day 2 - 
+### Day 2 - Done.
+
+#### Remember
+
+* `:keys` to destructure a map/record param easily.
+* Nice example of `reduce`.
+* `throw`ing an exception, and testing for it.
+
+### Day 3 - 
+
+#### Remember
