@@ -36,6 +36,14 @@ I used `criterium/quick-bench` to benchmark.
 ### Day 3 - Done.
 
 #### Remember
+
 * `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
 * The `as->` threading macro.
 * `pr-str` to print a LazySeq.
+
+#### Todo
+
+* I resorted to `loop`. Maybe use `reduce` instead?
+* The `loop` can be infinite on bad data, i.e. if we never get down to just one diagnostic. I feel like I should check for this, and `throw` an exception if it happens. Would `reduce` avoid the infinite loop? I'd still want to `throw` an exception so it's clear what broke.
+
+### Day 4 - 
