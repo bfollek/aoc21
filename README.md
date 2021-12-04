@@ -37,3 +37,4 @@ I used `criterium/quick-bench` to benchmark.
 
 #### Remember
 * `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
+* The `as->` threading macro.
