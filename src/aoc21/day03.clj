@@ -33,5 +33,28 @@
         epsilon-rate (bit-seq-to-decimal lcb)]
     (* gamma-rate epsilon-rate)))
 
+(defn check-bit
+  [diagnostics bit index]
+  (remove #(= (nth %1 index) bit) diagnostics))
+
+(defn rating
+  [diagnostics bits]
+  (let [indexes (range (dec (count bits)))]
+    (map #(check-bit diagnostics (str (nth bits %1)) %1) indexes)))
+  ;; filter diagnostics on each bit till there's just 1 - that's the answer.
+  ;; `throw` if we don't find one, or (enhancement) if we get stuck in an umimproved loop. 
+  ;; (remove pred coll)
+;; (let [coll [0 1 2 3 4 5]
+;;         i 3]
+;;     (concat (subvec coll 0 i)
+;;             (subvec coll (inc i))))
+  ;(let [r "10"]
+   ; (bit-seq-to-decimal r)))
+
 (defn part-2
-  [file-name])
+  [file-name]
+  (let [diagnostics (rh/read-lines file-name)
+        [mcb lcb] (common-bits diagnostics)
+        oxy (rating diagnostics mcb)
+        co2 (rating diagnostics lcb)]
+    (* oxy co2)))
