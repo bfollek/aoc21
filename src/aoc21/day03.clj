@@ -4,11 +4,10 @@
    [rabbithole.core :as rh]))
 
 (defn one-bits
+  "If the nth diagnostic bit is 1, add 1 to the nth counter.
+  Return the updated counters vector."
   [counters diagnostic]
-  ;; If the nth diagnostic bit is 1, add 1 to the nth counter.
-  ;; Return the updated counters vector.
   (map #(if (= %2 \1) (+ %1 1) %1) counters diagnostic))
-  ;(map #(+ %1 (if (= %2 \1) 1 0)) counters diagnostic))
 
 (defn most-common-bits
   [diagnostics]
