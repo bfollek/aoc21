@@ -39,11 +39,10 @@
     (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
 
 (defn rating
-  [diagnostics most-common-bits?]
-  ;[diagnostics bits]
+  [diagnostics use-most-common-bits?]
   (loop [d diagnostics index 0]
     (let [[mcb lcb] (common-bits d)
-          bits (if most-common-bits? mcb lcb)]
+          bits (if use-most-common-bits? mcb lcb)]
       (if (<= (count d) 1)
         (bit-seq-to-decimal (first d))
         (recur (check-bit d bits index) (inc index))))))
@@ -51,9 +50,6 @@
 (defn part-2
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        ;[mcb lcb] (common-bits diagnostics)
         oxy (rating diagnostics true)
         co2 (rating diagnostics false)]
-    ;(println (pr-str "mcb:" mcb "lcb:" lcb))
-    (println (str "oxy:" oxy "co2:" co2))
     (* oxy co2)))
