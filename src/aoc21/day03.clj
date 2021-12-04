@@ -14,7 +14,7 @@
   ;; Start with a vector of zeros, one for each bit in a diagnostic.
   (as-> (into (vector-of :int) (repeat (count (nth diagnostics 0)) 0)) counters
     (reduce one-bits counters diagnostics)
-    (map #(if (> %1 (/ (count diagnostics) 2)) 1 0) counters)))
+    (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0) counters)))
 
 (defn bit-seq-to-decimal
   [sq]
