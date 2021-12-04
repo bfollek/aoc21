@@ -16,15 +16,19 @@
     (reduce one-bits counters diagnostics)
     (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0) counters)))
 
+(defn common-bits
+  [diagnostics]
+  (let [mcb (most-common-bits diagnostics)
+        lcb (map #(if (= %1 1) 0 1) mcb)] ; least common bits - flip each bit.
+    [mcb lcb]))
+
 (defn bit-seq-to-decimal
   [sq]
   (Integer/parseInt (apply str sq) 2))
 
 (defn part-1
   [file-name]
-  (let [diagnostics (rh/read-lines file-name)
-        mcb (most-common-bits diagnostics)
-        lcb (map #(if (= %1 1) 0 1) mcb) ; least common bits - flip each bit.
+  (let [[mcb lcb] (common-bits (rh/read-lines file-name))
         gamma-rate (bit-seq-to-decimal mcb)
         epsilon-rate (bit-seq-to-decimal lcb)]
     (* gamma-rate epsilon-rate)))
