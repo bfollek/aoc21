@@ -33,7 +33,7 @@ I used `criterium/quick-bench` to benchmark.
 * Nice example of `reduce`.
 * `throw`ing an exception, and testing for it.
 
-### Day 3 - 
+### Day 3 - Done.
 
 #### Remember
 * `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
