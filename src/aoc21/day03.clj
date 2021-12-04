@@ -24,7 +24,7 @@
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
         mcb (most-common-bits diagnostics)
-        lcb (map #(if (= %1 1) 0 1) mcb)
+        lcb (map #(if (= %1 1) 0 1) mcb) ; least common bits - flip each bit.
         gamma-rate (bit-seq-to-decimal mcb)
         epsilon-rate (bit-seq-to-decimal lcb)]
     (* gamma-rate epsilon-rate)))
