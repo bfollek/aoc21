@@ -20,6 +20,7 @@
   [diagnostics]
   (let [mcb (most-common-bits diagnostics)
         lcb (map #(Math/abs (- %1 1)) mcb)] ; least common bits - flip each bit.
+    (println (str "mcb: " mcb "lcb:" lcb))
     [mcb lcb]))
 
 (defn bit-seq-to-decimal
@@ -34,13 +35,19 @@
     (* gamma-rate epsilon-rate)))
 
 (defn check-bit
-  [diagnostics bit index]
-  (remove #(= (nth %1 index) bit) diagnostics))
+  [diagnostics bits index]
+  (let [bit (nth bits index)]
+    (println (str "bit:" bit))
+    (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
 
 (defn rating
   [diagnostics bits]
-  (let [indexes (range (dec (count bits)))]
-    (map #(check-bit diagnostics (str (nth bits %1)) %1) indexes)))
+  ;(let [indexes (range (dec (count bits)))]
+  (loop [d diagnostics index 0]
+    (if (<= (count d) 1)
+      (recur (check-bit d bits index) (inc index))
+      (bit-seq-to-decimal d))))
+    ;(map #(check-bit diagnostics (str (nth bits %1)) %1) indexes)))
   ;; filter diagnostics on each bit till there's just 1 - that's the answer.
   ;; `throw` if we don't find one, or (enhancement) if we get stuck in an umimproved loop. 
   ;; (remove pred coll)
