@@ -19,7 +19,7 @@
 (defn common-bits
   [diagnostics]
   (let [mcb (most-common-bits diagnostics)
-        lcb (map #(if (= %1 1) 0 1) mcb)] ; least common bits - flip each bit.
+        lcb (map #(Math/abs (- %1 1)) mcb)] ; least common bits - flip each bit.
     [mcb lcb]))
 
 (defn bit-seq-to-decimal
