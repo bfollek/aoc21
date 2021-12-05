@@ -1,15 +1,3 @@
-
-Advent of Code
-
-    [About][Events][Shop][Settings][Log Out]
-
-bfollek 6*
-       y(2021)
-
-    [Calendar][AoC++][Sponsors][Leaderboard][Stats]
-
-Our sponsors help make Advent of Code possible:
-DRW - Low latency fintech. First and fastest! Hiring in: Montreal, Chicago, London
 --- Day 4: Giant Squid ---
 
 You're already almost 1.5km (almost a mile) below the surface of the ocean, already so deep that you can't see any sunlight. What you can see, however, is a giant squid that has attached itself to the outside of your submarine.

@@ -47,3 +47,7 @@ I used `criterium/quick-bench` to benchmark.
 * The `loop` can be infinite on bad data, i.e. if we never get down to just one diagnostic. I feel like I should check for this, and `throw` an exception if it happens. Would `reduce` avoid the infinite loop? I'd still want to `throw` an exception so it's clear what broke.
 
 ### Day 4 - 
+
+#### Remember
+
+* `to-array-2d`, `aget`, `alength`
