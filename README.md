@@ -43,8 +43,7 @@ I used `criterium/quick-bench` to benchmark.
 
 #### Todo
 
-* I resorted to `loop`. Maybe use `reduce` instead?
-* The `loop` can be infinite on bad data, i.e. if we never get down to just one diagnostic. I feel like I should check for this, and `throw` an exception if it happens. Would `reduce` avoid the infinite loop? I'd still want to `throw` an exception so it's clear what broke.
+* I resorted to `loop`. Maybe use `reduce` instead? But I need to update the whole diagnostics collection in each pass, not just the next element in the collection. This doesn't feel like a fit for `reduce`.
 
 ### Day 4 - 
 
