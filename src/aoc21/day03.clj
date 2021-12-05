@@ -44,7 +44,7 @@
     (let [[mcb lcb] (common-bits diags)
           bits (if use-most-common-bits? mcb lcb)]
       (when (> index (count bits))
-        (throw (IllegalArgumentException. "index > bits size:")))
+        (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
       (if (<= (count diags) 1)
         (bit-seq-to-decimal (first diags))
         (recur (check-bit diags bits index) (inc index))))))
