@@ -1,4 +1,3 @@
-
 (ns aoc21.day03
   (:require
    [rabbithole.core :as rh]))
