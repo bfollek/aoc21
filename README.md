@@ -41,6 +41,7 @@ I used `criterium/quick-bench` to benchmark.
 * The `as->` threading macro.
 * `pr-str` to print a LazySeq.
 * `reduced` to return early from `reduce`.
+* `format` is like `printf`.
 
 ### Day 4 - 
 
