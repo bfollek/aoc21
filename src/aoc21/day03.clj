@@ -44,6 +44,7 @@
     (if (<= (count diags) 1)
       ;; Found the rating.
       (bit-string-to-number (first diags))
+      ;; Keep looking.
       (let [[mcb lcb] (common-bits diags)
             bits (if use-most-common-bits? mcb lcb)]
         (when (>= index (count bits))
