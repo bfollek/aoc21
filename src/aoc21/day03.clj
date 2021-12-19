@@ -40,7 +40,7 @@
 (defn rating
   [diagnostics use-most-common-bits?]
   (loop [diags diagnostics index 0]
-    (comment (println "count diags:" (count diags)))
+    #_(println "count diags:" (count diags))
     (if (<= (count diags) 1)
       ;; Found the rating.
       (bit-string-to-number (first diags))
@@ -54,7 +54,7 @@
 (defn rating-using-reduced
   [diagnostics use-most-common-bits?]
   (reduce (fn [diags index]
-            (comment (println "count diags:" (count diags)))
+            #_(println "count diags:" (count diags))
             (if (<= (count diags) 1)
                ;; We may finish before we've checked all the bits.
               (reduced diags)
