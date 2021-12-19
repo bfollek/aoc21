@@ -41,13 +41,14 @@
   [diagnostics use-most-common-bits?]
   (loop [diags diagnostics index 0]
     (comment (println "count diags:" (count diags)))
-    (let [[mcb lcb] (common-bits diags)
-          bits (if use-most-common-bits? mcb lcb)]
-      (when (> index (count bits))
-        (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
-      (if (> (count diags) 1)
-        (recur (check-bit diags bits index) (inc index))
-        (bit-string-to-number (first diags))))))
+    (if (> (count diags) 1)
+      (let [[mcb lcb] (common-bits diags)
+            bits (if use-most-common-bits? mcb lcb)]
+        (when (>= index (count bits))
+          (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
+        (recur (check-bit diags bits index) (inc index)))
+      ;; Found the rating.
+      (bit-string-to-number (first diags)))))
 
 (defn rating-using-reduced
   [diagnostics use-most-common-bits?]
