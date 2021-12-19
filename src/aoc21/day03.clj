@@ -48,9 +48,22 @@
         (bit-seq-to-decimal (first diags))
         (recur (check-bit diags bits index) (inc index))))))
 
+(defn rating-2
+  [diagnostics use-most-common-bits?]
+  (reduce (fn [diags index]
+            ;(println "count diags:" (count diags))
+            (if (<= (count diags) 1)
+              (reduced diags)
+              (let [[mcb lcb] (common-bits diags)
+                    bits (if use-most-common-bits? mcb lcb)]
+                (check-bit diags bits index))))
+          diagnostics
+          (range (count (first diagnostics)))))
+
 (defn part-2
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        oxy (rating diagnostics true)
-        co2 (rating diagnostics false)]
-    (* oxy co2)))
+        oxy (rating-2 diagnostics true)
+        co2 (rating-2 diagnostics false)]
+    (* (bit-seq-to-decimal (first oxy))
+       (bit-seq-to-decimal (first co2)))))
