@@ -40,8 +40,9 @@
 (defn rating
   [diagnostics use-most-common-bits?]
   (reduce (fn [diags index]
-            ;(println "count diags:" (count diags))
+            (comment (println "count diags:" (count diags)))
             (if (<= (count diags) 1)
+               ;; We may finish before we've checked all the bits.
               (reduced diags)
               (let [[mcb lcb] (common-bits diags)
                     bits (if use-most-common-bits? mcb lcb)]
