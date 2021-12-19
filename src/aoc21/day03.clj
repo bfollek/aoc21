@@ -77,6 +77,11 @@
   (let [diagnostics (rh/read-lines file-name)
         oxy (rating-reduced diagnostics true)
         co2 (rating-reduced diagnostics false)]
-    ;; `oxy` and `co2` are one-element string seqs. The string
-    ;; is binary digits. Extract the string and convert it to a number.
-    (apply * (map #(->> %1 first bit-string-to-number) [oxy co2]))))
+    ;; `oxy` and `co2` are one-element string seqs. Each string
+    ;; is composed of binary digits. Extract the strings,
+    ;; convert them to numbers, and multiply them.
+    (->>
+     [oxy co2]
+     (map first)
+     (map bit-string-to-number)
+     (apply *))))
