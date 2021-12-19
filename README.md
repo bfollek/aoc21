@@ -40,10 +40,7 @@ I used `criterium/quick-bench` to benchmark.
 * `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
 * The `as->` threading macro.
 * `pr-str` to print a LazySeq.
-
-#### Todo
-
-* I resorted to `loop`. Maybe use `reduce` instead? But I need to update the whole diagnostics collection in each pass, not just the next element in the collection. This doesn't feel like a fit for `reduce`.
+* `reduced` to return early from `reduce`.
 
 ### Day 4 - 
 
