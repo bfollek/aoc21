@@ -52,7 +52,7 @@
           (throw (ArrayIndexOutOfBoundsException. (format "index %d > bits size %d" index bits-size))))
         (recur (check-bit diags bits index) (inc index))))))
 
-(defn rating-using-reduced
+(defn rating-reduced
   [diagnostics use-most-common-bits?]
   (reduce (fn [diags index]
             #_(println "count diags:" (count diags))
@@ -71,7 +71,12 @@
         oxy (rating diagnostics true)
         co2 (rating diagnostics false)]
     (* oxy co2)))
-    ;; This version is for `rating-using-reduced`.
+
+(defn part-2-reduced
+  [file-name]
+  (let [diagnostics (rh/read-lines file-name)
+        oxy (rating-reduced diagnostics true)
+        co2 (rating-reduced diagnostics false)]
     ;; `oxy` and `co2` are one-element string seqs. The string
     ;; is binary digits. Extract the string and convert it to a number.
-    ;;(apply * (map #(->> %1 first bit-string-to-number) [oxy co2]))))
+    (apply * (map #(->> %1 first bit-string-to-number) [oxy co2]))))
