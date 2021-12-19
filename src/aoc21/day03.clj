@@ -82,6 +82,5 @@
     ;; convert them to numbers, and multiply them.
     (->>
      [oxy co2]
-     (map first)
-     (map bit-string-to-number)
+     (map (comp bit-string-to-number first))
      (apply *))))
