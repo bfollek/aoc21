@@ -46,9 +46,10 @@
       (bit-string-to-number (first diags))
       ;; Keep looking.
       (let [[mcb lcb] (common-bits diags)
-            bits (if use-most-common-bits? mcb lcb)]
-        (when (>= index (count bits))
-          (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
+            bits (if use-most-common-bits? mcb lcb)
+            bits-size (count bits)]
+        (when (>= index bits-size)
+          (throw (ArrayIndexOutOfBoundsException. (format "index %d > bits size %d" index bits-size))))
         (recur (check-bit diags bits index) (inc index))))))
 
 (defn rating-using-reduced
