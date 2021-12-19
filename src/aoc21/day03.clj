@@ -43,11 +43,11 @@
     (comment (println "count diags:" (count diags)))
     (let [[mcb lcb] (common-bits diags)
           bits (if use-most-common-bits? mcb lcb)]
-      (when (>= index (count bits))
+      (when (> index (count bits))
         (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
-      (if (<= (count diags) 1)
-        (bit-string-to-number (first diags))
-        (recur (check-bit diags bits index) (inc index))))))
+      (if (> (count diags) 1)
+        (recur (check-bit diags bits index) (inc index))
+        (bit-string-to-number (first diags))))))
 
 (defn rating-using-reduced
   [diagnostics use-most-common-bits?]
