@@ -21,15 +21,15 @@
         lcb (map #(Math/abs (- %1 1)) mcb)] ; least common bits - flip each bit.
     [mcb lcb]))
 
-(defn bit-seq-to-decimal
+(defn bit-string-to-number
   [sq]
   (Integer/parseInt (apply str sq) 2))
 
 (defn part-1
   [file-name]
   (let [[mcb lcb] (common-bits (rh/read-lines file-name))
-        gamma-rate (bit-seq-to-decimal mcb)
-        epsilon-rate (bit-seq-to-decimal lcb)]
+        gamma-rate (bit-string-to-number mcb)
+        epsilon-rate (bit-string-to-number lcb)]
     (* gamma-rate epsilon-rate)))
 
 (defn check-bit
@@ -38,17 +38,6 @@
     (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
 
 (defn rating
-  [diagnostics use-most-common-bits?]
-  (loop [diags diagnostics index 0]
-    (let [[mcb lcb] (common-bits diags)
-          bits (if use-most-common-bits? mcb lcb)]
-      (when (> index (count bits))
-        (throw (ArrayIndexOutOfBoundsException. "index > bits size:")))
-      (if (<= (count diags) 1)
-        (bit-seq-to-decimal (first diags))
-        (recur (check-bit diags bits index) (inc index))))))
-
-(defn rating-2
   [diagnostics use-most-common-bits?]
   (reduce (fn [diags index]
             ;(println "count diags:" (count diags))
@@ -63,7 +52,8 @@
 (defn part-2
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        oxy (rating-2 diagnostics true)
-        co2 (rating-2 diagnostics false)]
-    (* (bit-seq-to-decimal (first oxy))
-       (bit-seq-to-decimal (first co2)))))
+        oxy (rating diagnostics true)
+        co2 (rating diagnostics false)]
+    ;; `oxy` and `co2` are one-element string seqs. The string
+    ;; is binary digits. Extract the string and convert it to a number.
+    (apply * (map #(->> %1 first bit-string-to-number) [oxy co2]))))
