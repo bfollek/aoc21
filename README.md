@@ -42,7 +42,8 @@ I used `criterium/quick-bench` to benchmark.
 * `pr-str` to print a LazySeq.
 * `reduced` to return early from `reduce`.
 * `format` is like `printf`.
-* `comp` to **compose** several functions into one.
+* `comp` to **compose** several functions into one. (Code didn't make final cut.)
+* `partial` as a way to simplify a reducer function.
 
 ### Day 4 - 
 

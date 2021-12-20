@@ -53,20 +53,23 @@
         (recur (check-bit diags bits index) (inc index))))))
 
 (defn reducer
-  [use-most-common-bits? diags index]
+  [use-most-common-bits? diagnostics index]
   #_(println "count diags:" (count diags))
-  (if (<= (count diags) 1)
+  (if (<= (count diagnostics) 1)
     ;; We may finish before we've checked all the bits.
-    (reduced diags)
-    (let [[mcb lcb] (common-bits diags)
+    (reduced diagnostics)
+    ;; Because we're removing `diagnostics` from the collection,
+    ;; we have to recalc `(common-bits)` each time through. 
+    (let [[mcb lcb] (common-bits diagnostics)
           bits (if use-most-common-bits? mcb lcb)]
-      (check-bit diags bits index))))
+      (check-bit diagnostics bits index))))
 
 (defn rating-reduced
   [use-most-common-bits? diagnostics]
-  (reduce (partial reducer use-most-common-bits?)
-          diagnostics
-          (range (count (first diagnostics)))))
+  (let [r (reduce (partial reducer use-most-common-bits?)
+                  diagnostics
+                  (range (count (first diagnostics))))]
+    (-> r first bit-string-to-number)))
 
 (defn part-2
   [file-name]
@@ -80,10 +83,4 @@
   (let [diagnostics (rh/read-lines file-name)
         oxy (rating-reduced true diagnostics)
         co2 (rating-reduced false diagnostics)]
-    ;; `oxy` and `co2` are one-element string seqs. Each string
-    ;; is composed of binary digits. Extract the strings,
-    ;; convert them to numbers, and multiply them.
-    (->>
-     [oxy co2]
-     (map (comp bit-string-to-number first))
-     (apply *))))
+    (* oxy co2)))
