@@ -1,14 +1,14 @@
 (ns aoc21.day02-test
-  (:require [clojure.test :refer :all]
-            [aoc21.day02 :refer :all]))
+  (:require [clojure.test :as t]
+            [aoc21.day02 :as day02]))
 
-(deftest day02
-  (testing "part-1."
-    (is (= 1990000 (aoc21.day02/part-1 "data/day02.txt"))))
-  (testing "part-2."
-    (is (= 1975421260 (aoc21.day02/part-2 "data/day02.txt")))))
+(t/deftest day02-happy-path
+  (t/testing "part-1."
+    (t/is (= 1990000 (day02/part-1 "data/day02.txt"))))
+  (t/testing "part-2."
+    (t/is (= 1975421260 (day02/part-2 "data/day02.txt")))))
 
-(deftest direction-exception
-  (testing "direction exception."
-    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (aoc21.day02/part-1 "data/day02-direction-exception.txt"))))
-  (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (aoc21.day02/part-2 "data/day02-direction-exception.txt"))))
+(t/deftest direction-exception
+  (t/testing "direction exception."
+    (t/is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (day02/part-1 "data/day02-direction-exception.txt"))))
+  (t/is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (day02/part-2 "data/day02-direction-exception.txt"))))

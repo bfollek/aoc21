@@ -1,9 +1,9 @@
 (ns aoc21.day04-test
-  (:require [clojure.test :refer :all]
-            [aoc21.day04 :refer :all]))
+  (:require [clojure.test :as t]
+            [aoc21.day04 :as day04]))
 
-(deftest day04
-  (testing "part-1."
-    (is (= nil (aoc21.day04/part-1 "data/day04.txt"))))
-  (testing "part-2."
-    (is (= nil (aoc21.day04/part-2 "data/day04.txt")))))
+(t/deftest day04-happy-path
+  (t/testing "part-1."
+    (t/is (= nil (day04/part-1 "data/day04.txt"))))
+  (t/testing "part-2."
+    (t/is (= nil (day04/part-2 "data/day04.txt")))))
