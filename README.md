@@ -37,6 +37,7 @@ I used `criterium/quick-bench` to benchmark.
 
 #### Remember
 
+* `rating-loop` and `rating-reduced` as two ways to do the same thing. In this case, maybe `rating-loop` is cleaner? Though `rating-reduced` doesn't need an extra check to prevent an infinite loop.
 * `vector-of` for performance. Unboxed primitives. (Though not a big deal in this case, still good to know.)
 * The `as->` threading macro.
 * `pr-str` to print a LazySeq.

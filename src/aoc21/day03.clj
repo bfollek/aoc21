@@ -37,7 +37,7 @@
   (let [bit (nth bits index)]
     (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
 
-(defn rating
+(defn rating-loop
   [use-most-common-bits? diagnostics]
   (loop [diags diagnostics index 0]
     #_(println "count diags:" (count diags))
@@ -48,6 +48,7 @@
       (let [[mcb lcb] (common-bits diags)
             bits (if use-most-common-bits? mcb lcb)
             bits-size (count bits)]
+        ;; Probably not necessary, but make sure we don't loop forever.
         (when (>= index bits-size)
           (throw (ArrayIndexOutOfBoundsException. (format "index %d > bits size %d" index bits-size))))
         (recur (check-bit diags bits index) (inc index))))))
@@ -74,8 +75,8 @@
 (defn part-2
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        oxy (rating true diagnostics)
-        co2 (rating false diagnostics)]
+        oxy (rating-loop true diagnostics)
+        co2 (rating-loop false diagnostics)]
     (* oxy co2)))
 
 (defn part-2-reduced
