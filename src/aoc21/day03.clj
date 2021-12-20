@@ -38,7 +38,7 @@
     (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
 
 (defn rating
-  [diagnostics use-most-common-bits?]
+  [use-most-common-bits? diagnostics]
   (loop [diags diagnostics index 0]
     #_(println "count diags:" (count diags))
     (if (<= (count diags) 1)
@@ -52,31 +52,34 @@
           (throw (ArrayIndexOutOfBoundsException. (format "index %d > bits size %d" index bits-size))))
         (recur (check-bit diags bits index) (inc index))))))
 
+(defn reducer
+  [use-most-common-bits? diags index]
+  #_(println "count diags:" (count diags))
+  (if (<= (count diags) 1)
+    ;; We may finish before we've checked all the bits.
+    (reduced diags)
+    (let [[mcb lcb] (common-bits diags)
+          bits (if use-most-common-bits? mcb lcb)]
+      (check-bit diags bits index))))
+
 (defn rating-reduced
-  [diagnostics use-most-common-bits?]
-  (reduce (fn [diags index]
-            #_(println "count diags:" (count diags))
-            (if (<= (count diags) 1)
-               ;; We may finish before we've checked all the bits.
-              (reduced diags)
-              (let [[mcb lcb] (common-bits diags)
-                    bits (if use-most-common-bits? mcb lcb)]
-                (check-bit diags bits index))))
+  [use-most-common-bits? diagnostics]
+  (reduce (partial reducer use-most-common-bits?)
           diagnostics
           (range (count (first diagnostics)))))
 
 (defn part-2
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        oxy (rating diagnostics true)
-        co2 (rating diagnostics false)]
+        oxy (rating true diagnostics)
+        co2 (rating false diagnostics)]
     (* oxy co2)))
 
 (defn part-2-reduced
   [file-name]
   (let [diagnostics (rh/read-lines file-name)
-        oxy (rating-reduced diagnostics true)
-        co2 (rating-reduced diagnostics false)]
+        oxy (rating-reduced true diagnostics)
+        co2 (rating-reduced false diagnostics)]
     ;; `oxy` and `co2` are one-element string seqs. Each string
     ;; is composed of binary digits. Extract the strings,
     ;; convert them to numbers, and multiply them.
