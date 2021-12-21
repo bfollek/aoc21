@@ -8,7 +8,7 @@
   ;; https://twitter.com/kelvinmai/status/1466914942318043139
   (->> diagnostics
        (apply map vector) ; Transpose.
-       (map #(reduce + 0 %1))
+       (map #(reduce + %1))
        (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0))))
 
 (defn common-bits
@@ -20,7 +20,6 @@
 (defn bit-vector-to-number
   [sq]
   (Integer/parseInt (apply str sq) 2))
-
 
 (defn check-bit
   [diagnostics bits index]
