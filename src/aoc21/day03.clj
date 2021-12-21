@@ -13,14 +13,14 @@
   [diagnostics]
   ;; https://twitter.com/kelvinmai/status/1466914942318043139
   (->> diagnostics
-       (apply map vector)
+       (apply map vector) ; Transpose.
        (map #(reduce + 0 %1))
        (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0))))
 
 (defn common-bits
   [diagnostics]
   (let [mcb (most-common-bits diagnostics)
-        lcb (map #(Math/abs (- %1 1)) mcb)] ; least common bits - flip each bit.
+        lcb (map #(Math/abs (- %1 1)) mcb)] ; Least common bits - flip each bit.
     [mcb lcb]))
 
 (defn bit-vector-to-number
@@ -31,7 +31,7 @@
 (defn check-bit
   [diagnostics bits index]
   (let [bit (nth bits index)]
-    (remove #(not (= (Character/digit (nth %1 index) 2) bit)) diagnostics)))
+    (remove #(not= (nth %1 index) bit) diagnostics)))
 
 (defn rating-loop
   [use-most-common-bits? diagnostics]
@@ -39,7 +39,9 @@
     #_(println "count diags:" (count diags))
     (if (<= (count diags) 1)
       ;; Found the rating.
-      (bit-vector-to-number (first diags))
+      (do
+        (println "first diags" (first diags))
+        (bit-vector-to-number (first diags)))
       ;; Keep looking.
       (let [[mcb lcb] (common-bits diags)
             bits (if use-most-common-bits? mcb lcb)
@@ -86,14 +88,14 @@
 
 (defn part-2
   [file-name]
-  (let [diagnostics (rh/read-lines file-name)
+  (let [diagnostics (load-diagnostics file-name)
         oxy (rating-loop true diagnostics)
         co2 (rating-loop false diagnostics)]
     (* oxy co2)))
 
 (defn part-2-reduced
   [file-name]
-  (let [diagnostics (rh/read-lines file-name)
+  (let [diagnostics (load-diagnostics file-name)
         oxy (rating-reduced true diagnostics)
         co2 (rating-reduced false diagnostics)]
     (* oxy co2)))
