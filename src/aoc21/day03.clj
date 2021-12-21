@@ -3,12 +3,6 @@
    [clojure.string :as str]
    [rabbithole.core :as rh]))
 
-(defn one-bits
-  "If the nth diagnostic bit is 1, add 1 to the nth counter.
-  Return the updated counters vector."
-  [counters diagnostic]
-  (map #(if (= %2 \1) (+ %1 1) %1) counters diagnostic))
-
 (defn most-common-bits
   [diagnostics]
   ;; https://twitter.com/kelvinmai/status/1466914942318043139
