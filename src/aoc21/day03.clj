@@ -39,9 +39,7 @@
     #_(println "count diags:" (count diags))
     (if (<= (count diags) 1)
       ;; Found the rating.
-      (do
-        (println "first diags" (first diags))
-        (bit-vector-to-number (first diags)))
+      (bit-vector-to-number (first diags))
       ;; Keep looking.
       (let [[mcb lcb] (common-bits diags)
             bits (if use-most-common-bits? mcb lcb)
