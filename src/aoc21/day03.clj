@@ -7,7 +7,7 @@
   [diagnostics]
   ;; https://twitter.com/kelvinmai/status/1466914942318043139
   (->> diagnostics
-       (apply map vector) ; Transpose.
+       (rh/transpose)
        (map #(reduce + %1))
        (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0))))
 
