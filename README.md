@@ -45,6 +45,9 @@ I used `criterium/quick-bench` to benchmark.
 * `format` is like `printf`.
 * `comp` to **compose** several functions into one. (Code didn't make final cut.)
 * `partial` as a way to simplify a reducer function.
+* Using `apply map` to get at the columns of a 2D array.
+* `frequencies`
+* Destructuring a map with int keys and default values.
 
 ### Day 4 - 
 
