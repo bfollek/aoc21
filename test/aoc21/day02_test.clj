@@ -9,6 +9,7 @@
     (is (= 1975421260 (part-2 "data/day02.txt")))))
 
 (deftest direction-exception
-  (testing "direction exception."
+  (testing "part-1 direction exception."
     (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-1 "data/day02-direction-exception.txt"))))
-  (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-2 "data/day02-direction-exception.txt"))))
+  (testing "part-2 direction exception."
+    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-2 "data/day02-direction-exception.txt")))))
