@@ -5,11 +5,10 @@
 
 (defn most-common-bits
   [diagnostics]
-  ;; https://twitter.com/kelvinmai/status/1466914942318043139
-  (->> diagnostics
-       (rh/transpose)
-       (map #(reduce + %1))
-       (map #(if (>= %1 (/ (count diagnostics) 2)) 1 0))))
+  ;; https://twitter.com/Sharas_/status/1467543934851293189
+  (let [freqs (apply map (fn [& col] (frequencies col)) diagnostics)
+        bits  (map (fn [{zeros 0 ones 1 :or {zeros 0 ones 0}}] (if (>= ones zeros) 1 0)) freqs)]
+    bits))
 
 (defn common-bits
   [diagnostics]
