@@ -10,6 +10,6 @@
 
 (deftest direction-exception
   (testing "part-1 direction exception."
-    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-1 "data/day02-direction-exception.txt"))))
+    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-1 "data/day02_direction_exception.txt"))))
   (testing "part-2 direction exception."
-    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-2 "data/day02-direction-exception.txt")))))
+    (is (thrown-with-msg? IllegalArgumentException #"Unknown direction" (part-2 "data/day02_direction_exception.txt")))))
